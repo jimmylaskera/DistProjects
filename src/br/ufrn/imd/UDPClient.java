@@ -6,28 +6,21 @@ import java.net.InetAddress;
 import java.util.Scanner;
 
 public class UDPClient {
-	public UDPClient() {
-		System.out.println("UDP Client Started");
+	public UDPClient(String msg, int port) {
+		System.out.println("Processing requisition...");
 		try (Scanner scanner = new Scanner(System.in)) {
 			try {
 				DatagramSocket clientSocket = new DatagramSocket();
 				InetAddress inetAddress = InetAddress.getByName("localhost");
 				byte[] sendMessage;
-				while (true) {
-					System.out.print("Enter a message: ");
-					String message = scanner.nextLine();
-					if ("quit".equalsIgnoreCase(message)) {
-						break;
-					}
-					sendMessage = message.getBytes();
-					DatagramPacket sendPacket = new DatagramPacket(
-							sendMessage, sendMessage.length, 
-							inetAddress, 9003);
-					clientSocket.send(sendPacket);
-				}
-			clientSocket.close();
+				sendMessage = msg.getBytes();
+				DatagramPacket sendPacket = new DatagramPacket(
+						sendMessage, sendMessage.length, 
+						inetAddress, port);
+				clientSocket.send(sendPacket);
+				clientSocket.close();
 			} catch (IOException ex) { }
 		}
-		System.out.println("UDP Client Terminating ");
+		System.out.println("Requisition sent.");
 	}
 }
