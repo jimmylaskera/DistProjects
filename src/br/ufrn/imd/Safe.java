@@ -1,22 +1,20 @@
 package br.ufrn.imd;
 
 public class Safe {
-	private double packaged;
-	private double available;
+	private float moneyAvailable = 0f;
+	private float moneyBundled = 0f;
 	
 	public Safe () {}
-	public Safe (double pck, double avl) {
-		this.packaged = pck;
-		this.available = avl;
+	public Safe (float avl, float bnd) {
+		moneyAvailable = avl;
+		moneyBundled = bnd;
 	}
 	
-	double getPackaged () { return packaged; }
-	void setPackaged (double pck) { packaged = pck; }
+	float getMoneyBundled () { return moneyBundled; }
+	void setMoneyBundled (float bnd) { moneyBundled = bnd; }
 	
-	double getAvailable () { return available; }
-	void setAvailable (double avl) { available = avl; }
-	
-	public static void main(String args[]) {
-		new UDPServer("8002");
-	}
+	float getMoneyAvailable () { return moneyAvailable; }
+	void setMoneyAvailable (float avl) { moneyAvailable = avl; }
+
+	float getTotal () { return moneyAvailable + moneyBundled; }
 }
